@@ -36,7 +36,7 @@ spec:
         args: {{ .args }}
         {{- end }}
         env:
-        {{- range $key, $value := $.env }}
+        {{- range $key, $value := .env }}
         - name: {{ $key }}
           value: {{ $value | quote }}
         {{- end }}
