@@ -25,6 +25,10 @@ spec:
         image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
         imagePullPolicy: {{ $.Values.image.pullPolicy }}
         {{- end }}
+        {{- with $.Values.imagePullSecrets }}
+        imagePullSecrets:
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
         {{- if .command }}
           command:  {{ .command }}
         {{- end }}
