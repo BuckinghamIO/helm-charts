@@ -32,8 +32,7 @@ spec:
             {{- if .args }}
             {{ end }}
             {{- if .args }}
-            args:
-            - {{ .args }}
+            args: {{ .args }}
             {{ end }}
             env:
             {{- range $key, $value := .env }}

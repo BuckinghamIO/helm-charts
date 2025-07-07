@@ -29,8 +29,7 @@ spec:
           command:  {{ .command }}
         {{- end }}
         {{- if .args }}
-        args:
-        - {{ .args }}
+        args: {{ .args }}
         {{- end }}
         env:
         {{- range $key, $value := $.Values.env }}
