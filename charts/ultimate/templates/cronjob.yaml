@@ -1,0 +1,47 @@
+{{ range .Values.cronJobs }}
+{{- if .enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Values.name }}-{{ .name }}
+  labels:
+    {{ .Values.labels | toYaml | nindent 4 }}
+spec:
+  schedule: {{ .schedule }}
+  concurrencyPolicy: {{ .concurrencyPolicy }}
+  successfulJobsHistoryLimit: {{ .successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .failedJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      backoffLimit: {{ .backoffLimit }}
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: {{ .name }}
+            {{ if .image }}
+            image: "{{ .image.repository }}:{{ .image.tag }}"
+            imagePullPolicy: {{ .image.pullPolicy }}
+            {{ else }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{ end }}
+            {{- if .command }}
+            command:
+            - {{ .command }}
+            {{ end }}
+            env:
+            {{- range $key, $value := .env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+            resources:
+              requests:
+                memory: "128Mi"
+                cpu: "100m"
+              limits:
+                memory: "256Mi"
+                cpu: "200m"
+---
+{{- end }}
+{{- end }}

@@ -1,12 +1,47 @@
+name: jdmpartdetective
+
+
+deployment:
+  command: []
+  replicaCount: 1
+
+
+cronjobs: []
+  # - name: update-exchange-rates
+  #   enabled: true
+  #   schedule: "0 0 * * *"  # Run at midnight every day
+  #   concurrencyPolicy: Forbid
+  #   successfulJobsHistoryLimit: 3
+  #   failedJobsHistoryLimit: 3
+  #   backoffLimit: 2
+  #   image: {}
+  #     # If not set it will use the image from the main deployment
+  #     # repository: "{{ .Values.image.repository }}"
+  #     # tag: "{{ .Values.image.tag }}"
+  #     # pullPolicy: "{{ .Values.image.pullPolicy }}"
+  #   env:
+  #     # - name: {{ $key }}
+  #     #   value: {{ $value | quote }}
+jobs: []
+  # - name: migrations
+  #   enabled: true
+  #   image:
+  #     # If not set it will use the image from the main deployment
+  #     # repository: "{{ .Values.image.repository }}"
+  #     # tag: "{{ .Values.image.tag }}"
+  #     # pullPolicy: "{{ .Values.image.pullPolicy }}"
+  #   env:
+  #     # Include database credentials and other environment variables
+  #     # - name: DATABASE_URL
+  #     #   value: "postgresql://{{ .Values.postgresql.postgresqlUsername }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql:5432/{{ .Values.postgresql.postgresqlDatabase }}"
+  #   command:
+  #     - python
+  #     - manage.py
+  #     - migrate
+  #     - --noinput
 
 envVars: []
 
-# Default values for ultimate.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-# This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
-replicaCount: 1
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
