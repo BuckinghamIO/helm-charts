@@ -35,9 +35,14 @@ spec:
             args: {{ .args }}
             {{ end }}
             env:
-            {{- range $key, $value := $.Values.envVars }}
+            {{- range $key, $value := .env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
+            {{- end }}
+            {{ if .useDeploymentEnvVars }}
+            envFrom:
+            - configMapRef:
+                name: {{ $.Values.name }}-envvars
             {{- end }}
             resources:
               requests:
