@@ -3,6 +3,16 @@ entries:
   ultimate:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2025-07-07T23:18:51.647168041Z"
+    description: A Helm chart for Kubernetes
+    digest: 7294b387dc2bc8d1b5791b2937bdb3043b3e21397f7911e03df1573a2a0859c5
+    name: ultimate
+    type: application
+    urls:
+    - https://github.com/BuckinghamIO/helm-charts/releases/download/ultimate-0.1.11/ultimate-0.1.11.tgz
+    version: 0.1.11
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2025-07-07T23:06:25.323673367Z"
     description: A Helm chart for Kubernetes
     digest: 3344b101214db558b191edcc1721cebc073de7bfc5593cbe93015df4de18a07c
@@ -111,4 +121,4 @@ entries:
     urls:
     - https://github.com/BuckinghamIO/helm-charts/releases/download/ultimate-0.1.0/ultimate-0.1.0.tgz
     version: 0.1.0
-generated: "2025-07-07T23:06:25.323715867Z"
+generated: "2025-07-07T23:18:51.647221881Z"
