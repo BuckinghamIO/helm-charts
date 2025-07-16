@@ -19,7 +19,7 @@ spec:
           restartPolicy: OnFailure
           {{- with $.Values.imagePullSecrets }}
           imagePullSecrets:
-            {{- toYaml . | nindent 8 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           containers:
           - name: {{ .name }}
@@ -36,12 +36,14 @@ spec:
             {{- if .args }}
             args: {{ .args }}
             {{- end }}
+            {{- if .env }}
             env:
             {{- range $key, $value := .env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
-            {{ if .useDeploymentEnvVars }}
+            {{- end }}
+            {{- if .useDeploymentEnvVars }}
             envFrom:
             - configMapRef:
                 name: {{ $.Values.name }}-envvars
