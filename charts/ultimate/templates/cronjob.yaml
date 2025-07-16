@@ -23,13 +23,13 @@ spec:
           {{- end }}
           containers:
           - name: {{ .name }}
-            {{ if .image }}
+            {{- if .image }}
             image: "{{ .image.repository }}:{{ .image.tag }}"
             imagePullPolicy: {{ .image.pullPolicy }}
-            {{ else }}
+            {{- else }}
             image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
             imagePullPolicy: {{ $.Values.image.pullPolicy }}
-            {{ end }}
+            {{- end }}
             {{- if .command }}
             command:  {{ .command }}
             {{- end }}
