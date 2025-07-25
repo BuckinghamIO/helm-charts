@@ -80,7 +80,7 @@ spec:
         {{- end }}
         {{- if .secret }}
         secret:
-          secretName: {{ .secret.name }}
+          secretName: {{ .secret.secretName }}
           {{- if .secret.optional }}
           optional: {{ .secret.optional }}
           {{- end }}
