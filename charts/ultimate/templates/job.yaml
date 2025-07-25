@@ -90,13 +90,13 @@ spec:
           - key: {{ .key }}
             path: {{ .path }}
           {{- end }}
+          {{- end }}
         {{- end }}
         {{- if .emptyDir }}
         emptyDir: {}
         {{- end }}
       {{- end }}
       {{- end }}
-
 ---
 {{- end }}
 {{- end }}
