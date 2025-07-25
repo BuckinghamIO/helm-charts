@@ -45,6 +45,16 @@ spec:
         - configMapRef:
             name: {{ $.Values.name }}-envvars
         {{- end }}
+        {{- if .volumeMounts }}
+        volumeMounts:
+        {{- range .volumeMounts }}
+        - name: {{ .name }}
+          mountPath: {{ .mountPath }}
+          {{- if .subPath }}
+          subPath: {{ .subPath }}
+          {{- end }}
+        {{- end }}
+        {{- end }}
         # Include database credentials and other environment variables
         resources:
           requests:
@@ -55,6 +65,38 @@ spec:
             cpu: "200m"
       # Give enough time for slow migrations
       activeDeadlineSeconds: 300
+      {{- if .volumes }}
+      volumes:
+      {{- range .volumes }}
+      - name: {{ .name }}
+        {{- if .configMap }}
+        configMap:
+          name: {{ .configMap.name }}
+          items:
+          {{- range .configMap.items }}
+          - key: {{ .key }} 
+            path: {{ .path }}
+          {{- end }}
+        {{- end }}
+        {{- if .secret }}
+        secret:
+          secretName: {{ .secret.name }}
+          {{- if .secret.optional }}
+          optional: {{ .secret.optional }}
+          {{- end }}
+          {{- if .secret.items }}
+          items:
+          {{- range .secret.items }}
+          - key: {{ .key }}
+            path: {{ .path }}
+          {{- end }}
+        {{- end }}
+        {{- if .emptyDir }}
+        emptyDir: {}
+        {{- end }}
+      {{- end }}
+      {{- end }}
+
 ---
 {{- end }}
 {{- end }}
