@@ -2,7 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Values.name }}-envvars
+  annotations:
+    "helm.sh/hook-weight": "-10"  # Lower number means it runs earlier
 data:
   {{ range $key, $value := .Values.envVars }}
   {{ $key }}: {{ $value | quote }}
-  {{- end }}
+  {{ end }}
